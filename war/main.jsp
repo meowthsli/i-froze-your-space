@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="javax.jdo.PersistenceManager"%>
 <%@page import="ru.meowth.services.LetterService"%>
+<%@page import="ru.meowth.services.PMF"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -20,9 +22,11 @@
 		<div id="topbar" class="squizzed">	
 			<div id="topbar2">
 				С момента запуска сервиса было отправлено
-				<% LetterService service = new LetterService(); %>
-				<%= service.getLettersSentCount() %>
-				писем в будущее, ожидают отправки еще <%= service.getLettersInQueue() %>			
+				<% LetterService service = new LetterService();
+				PersistenceManager pm =  PMF.get().getPersistenceManager();
+				%>
+				<%= service.getLettersSentCount(pm) %>
+				писем в будущее, ожидают отправки еще <%= service.getLettersInQueue(pm) %>			
 			</div>
 		</div>	
 		<div id="left-block">

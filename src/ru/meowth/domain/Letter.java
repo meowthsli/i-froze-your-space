@@ -6,6 +6,8 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Text;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -25,7 +27,7 @@ public class Letter {
 	 * @param span
 	 */
 	public Letter(String body, String email, DeliverySpan span) {
-		this.body = body;
+		this.body = new Text(body);
 		this.email = email;
 		this.whenToDeliver = whenToShoot(span);
 	}
@@ -52,10 +54,10 @@ public class Letter {
 	 * Message body
 	 */
 	@Persistent
-	private String body;
+	private com.google.appengine.api.datastore.Text body;
 	
 	public String getBody() {
-		return body;
+		return body.toString();
 	}
 	
 	/**
@@ -82,7 +84,7 @@ public class Letter {
 	private static Date whenToShoot(DeliverySpan span) {		
 	
 		Random r = new Random();		
-		final float percents = (float)(r.nextInt(20) + 80);
+		final float percents = (float)(r.nextInt(20) + 80)/100f;
 		
 		Calendar c = Calendar.getInstance();		
 		switch(span){
@@ -103,7 +105,7 @@ public class Letter {
 			break;
 		}
 		
-		return new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH), 
-				c.get(Calendar.DAY_OF_MONTH));
+		return new Date(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), 
+				c.get(Calendar.YEAR));
 	}
 }
