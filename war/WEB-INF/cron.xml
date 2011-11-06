@@ -2,7 +2,7 @@
 <cronentries>
   <cron>
     <url>/timer</url>
-    <description>Send mails every 12 hours</description>
-    <schedule>every 12 hours</schedule>
+    <description>Send mails every 4 hours</description>
+    <schedule>every 4 hours</schedule>
   </cron>  
 </cronentries>
