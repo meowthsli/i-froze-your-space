@@ -105,7 +105,9 @@ public class Letter {
 			break;
 		}
 		
-		return new Date(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), 
-				c.get(Calendar.YEAR));
+		final int days = c.get(Calendar.DAY_OF_MONTH);
+		final int monthes = c.get(Calendar.MONTH); 
+		final int years = c.get(Calendar.YEAR);		
+		return new Date(years, monthes, days);
 	}
 }
