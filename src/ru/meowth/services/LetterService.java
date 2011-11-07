@@ -48,13 +48,12 @@ public class LetterService {
 					
 			@SuppressWarnings("unchecked")		
 			List<Letter> letters = (List<Letter>)q.execute(new Date());
-			pm.makeTransientAll(letters);		
-			q.deletePersistentAll();
-			
+			pm.deletePersistentAll(letters);
+
 			getStatisticsObject(pm).addLettersSent(letters.size());
 			return letters;
 		} 
-		finally {
+		finally {		
 			pm.close();
 		}		
 	}

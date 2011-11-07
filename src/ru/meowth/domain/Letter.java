@@ -108,6 +108,6 @@ public class Letter {
 		final int days = c.get(Calendar.DAY_OF_MONTH);
 		final int monthes = c.get(Calendar.MONTH); 
 		final int years = c.get(Calendar.YEAR);		
-		return new Date(years, monthes, days);
+		return new Date(years - 1900, monthes, days);
 	}
 }
